@@ -27,7 +27,7 @@ export const ticketsService = () => {
 
     const update = (id, name) => {
         const newDB  = db.map((ticket) => {
-            if (ticket.id === id) {
+            if (ticket.id === Number(id)) {
                 ticket.owner = name;
             }
             return ticket;

@@ -14,6 +14,12 @@ app.get("/tickets", (req, res) => {
   res.send(list);
 });
 
+app.get("/tickets/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const ticket = tickets.read(id);
+  res.send(ticket);
+});
+
 app.post("/tickets", (request, response) => {
 
   const {
@@ -40,3 +46,28 @@ app.post("/tickets", (request, response) => {
     }
   );
 });
+
+app.patch("/tickets/:id", (request, response) => {
+
+  const id = request.params.id;
+  const name = request.body.name
+
+  tickets.update(id,name)
+
+  return response.send(
+    {
+      message: "ticket actualizado",
+    }
+  );
+})
+
+app.delete("/tickets/:id", (request, response) => {
+  const id = Number(request.params.id);
+  tickets.remove(id);
+  return response.send(
+    {
+      message: "ticket eliminado",
+    }
+  );
+
+})
